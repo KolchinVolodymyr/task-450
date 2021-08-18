@@ -26,8 +26,6 @@ blog:
     {{/each}}
 
 <div class="main full">
-
-
     {{#if products.featured}}
         {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
     {{/if}}
@@ -42,6 +40,52 @@ blog:
         {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
     {{/if}}
     {{{region name="home_below_new_products"}}}
+
+
+    <!--  modal popup  -->
+    {{> components/custom/popup }}
+
+    <!--  slider show  -->
+    <div data-slick='{"slidesToShow": {{theme_settings.slidesToShow_id}}, "slidesToScroll": {{theme_settings.slidesToScroll_id}}  }'>
+        <div>
+            <h2>
+                {{theme_settings.modal_window_1}}
+            </h2>
+            <img src="{{theme_settings.modal_url_img_1}}" alt="">
+        </div>
+        <div>
+            <h2>
+                {{theme_settings.modal_window_2}}
+            </h2>
+            <img src="{{theme_settings.modal_url_img_2}}" alt="">
+        </div>
+        <div>
+            <h2>
+                {{theme_settings.modal_window_3}}
+            </h2>
+            <img src="{{theme_settings.modal_url_img_3}}" alt="">
+        </div>
+        <div>
+            <h2>
+                {{theme_settings.modal_window_4}}
+            </h2>
+            <img src="{{theme_settings.modal_url_img_4}}" alt="">
+        </div>
+        <div>
+            <h2>
+                {{theme_settings.modal_window_5}}
+            </h2>
+            <img src="{{theme_settings.modal_url_img_5}}" alt="">
+        </div>
+        <div>
+            <h2>
+                {{theme_settings.modal_window_6}}
+            </h2>
+            <img src="{{theme_settings.modal_url_img_6}}" alt="">
+        </div>
+    </div>
 </div>
 {{/partial}}
 {{> layout/base}}
+
+
