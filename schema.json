@@ -958,6 +958,126 @@
       },
       {
         "type": "heading",
+        "content": "Custom Carousel on the home page "
+      },
+      {
+        "type": "select",
+        "label": "Custom Carousel Slides to show",
+        "id": "slidesToShow_id",
+        "force_reload": true,
+        "options": [
+          {
+            "value": 1,
+            "label": "1"
+          },
+          {
+            "value": 2,
+            "label": "2"
+          },
+          {
+            "value": 3,
+            "label": "3"
+          },
+          {
+            "value": 4,
+            "label": "4"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "label": "Custom Carousel Slides to scroll",
+        "id": "slidesToScroll_id",
+        "force_reload": true,
+        "options": [
+          {
+            "value": 1,
+            "label": "1"
+          },
+          {
+            "value": 2,
+            "label": "2"
+          },
+          {
+            "value": 3,
+            "label": "3"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "label": "Content modal window №1",
+        "force_reload": true,
+        "id": "modal_window_1"
+      },
+      {
+        "type": "text",
+        "label": "Content modal url images #1",
+        "force_reload": true,
+        "id": "modal_url_img_1"
+      },
+      {
+        "type": "text",
+        "label": "Content modal window №2",
+        "force_reload": true,
+        "id": "modal_window_2"
+      },
+      {
+        "type": "text",
+        "label": "Content modal url images #2",
+        "force_reload": true,
+        "id": "modal_url_img_2"
+      },
+      {
+        "type": "text",
+        "label": "Content modal window №3",
+        "force_reload": true,
+        "id": "modal_window_3"
+      },
+      {
+        "type": "text",
+        "label": "Content modal url images #3",
+        "force_reload": true,
+        "id": "modal_url_img_3"
+      },
+      {
+        "type": "text",
+        "label": "Content modal window №4",
+        "force_reload": true,
+        "id": "modal_window_4"
+      },
+      {
+        "type": "text",
+        "label": "Content modal url images #4",
+        "force_reload": true,
+        "id": "modal_url_img_4"
+      },
+      {
+        "type": "text",
+        "label": "Content modal window №5",
+        "force_reload": true,
+        "id": "modal_window_5"
+      },
+      {
+        "type": "text",
+        "label": "Content modal url images #5",
+        "force_reload": true,
+        "id": "modal_url_img_5"
+      },
+      {
+        "type": "text",
+        "label": "Content modal window №6",
+        "force_reload": true,
+        "id": "modal_window_6"
+      },
+      {
+        "type": "text",
+        "label": "Content modal url images #6",
+        "force_reload": true,
+        "id": "modal_url_img_6"
+      },
+      {
+        "type": "heading",
         "content": "i18n.Carousel"
       },
       {
