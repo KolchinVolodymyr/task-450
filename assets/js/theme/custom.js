@@ -1,5 +1,4 @@
 import PageManager from "./page-manager";
-//import { defaultModal } from './global/modal';
 import $ from "jquery";
 import "jquery-modal";
 import "slick-carousel";
