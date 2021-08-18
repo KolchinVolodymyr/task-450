@@ -3,7 +3,6 @@ import $ from 'jquery';
 import 'jquery-modal';
 import 'slick-carousel';
 
-
 export default class Custom extends PageManager {
     constructor(context) {
         super(context);
