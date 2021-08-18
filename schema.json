@@ -946,6 +946,18 @@
     "settings": [
       {
         "type": "heading",
+        "content": "Modal Popup"
+      },
+      {
+        "type": "text",
+        "label": "Content modal popup",
+        "force_reload": true,
+        "id": "modal_popup_id",
+        "reference": "modal_popup_reference_id",
+        "reference_default": "none"
+      },
+      {
+        "type": "heading",
         "content": "i18n.Carousel"
       },
       {

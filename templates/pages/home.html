@@ -26,8 +26,6 @@ blog:
     {{/each}}
 
 <div class="main full">
-
-
     {{#if products.featured}}
         {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
     {{/if}}
@@ -43,6 +41,7 @@ blog:
     {{/if}}
     {{{region name="home_below_new_products"}}}
 
+    <!--modal popup-->
     {{> components/custom/popup }}
 </div>
 {{/partial}}
