@@ -1,0 +1,24 @@
+
+<div class="containerCustom">
+
+
+<!--    {{getImage product.main_image.data '500x500' (cdn theme_settings.default_image_product)}}-->
+<div>
+<!--    {{theme_settings.default_image_product}}-->
+</div>
+    <img class="emthemesModez-categoryPage-mainImage" src="{{getImage '500x500' product.main_image.data  }} ">
+
+<!--    <img src={{json product.main_image.data}} alt="">-->
+    <div>
+        product.id {{ product.id}}
+    </div>
+    <div>
+        product.title {{ product.title}}
+    </div>
+    <div>
+        product.price {{ product.price.without_tax.value}}
+    </div>
+</div>
+
+
+

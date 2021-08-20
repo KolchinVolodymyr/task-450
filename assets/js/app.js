@@ -54,6 +54,7 @@ const pageClasses = {
 
 const customClasses = {
     'pages/home': () => import('./theme/custom'),
+    'pages/custom/page/custom-order': () => import('./theme/custom/custom-order'),
 };
 
 /**
