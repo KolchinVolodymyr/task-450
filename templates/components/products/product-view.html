@@ -207,30 +207,10 @@
 
                 {{#if theme_settings.show_custom_fields_tabs '!==' true}}
                     {{#each product.custom_fields}}
-                        {{#if name '===' 'Sale'}}
-                            <span class="productView-Sale">
-                                {{value}}
-                            </span>
-                        {{/if}}
-                        {{#if name '===' 'Free shipping'}}
-                            <span class="productView-Free-Shipping">
-                                {{value}}
-                            </span>
-                        {{/if}}
-                        {{#if name '===' 'New'}}
-                            <span class="productView-New">
-                                {{value}}
-                            </span>
-                        {{/if}}
-                        {{#if name '===' 'Closeout'}}
-                            <span class="productView-Closeout">
-                                {{value}}
-                            </span>
-                        {{/if}}
+                        <dt class="productView-info-name">{{name}}:</dt>
+                        <dd class="productView-info-value">{{{ sanitize value}}}</dd>
                     {{/each}}
                 {{/if}}
-
-
             </dl>
         </div>
     </section>
