@@ -317,8 +317,8 @@
 
         &.is-open {
             display: block;
-            left: 0;
-            width: 100%;
+            //left: 0;
+            width: 10%;
         }
 
         .navPages-action-moreIcon {
@@ -332,6 +332,7 @@
 
     .navPages-list:not(.navPages-list-depth-max) .navPages-action.has-subMenu + & {
         .navPage-subMenu-list {
+            margin-left: 0;
             margin-right: 0;
 
             @include breakpoint("medium") {
@@ -375,7 +376,7 @@
 
 .navPage-subMenu-item {
     padding: spacing("half") 0;
-
+    width: 100%!important;
     @include breakpoint("medium") {
         @include grid-column(3);
         padding: 0 0.75rem !important; // 1
