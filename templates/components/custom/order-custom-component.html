@@ -1,23 +1,18 @@
+<style>
+.containerCustom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
 
-<div class="containerCustom">
 
 
-<!--    {{getImage product.main_image.data '500x500' (cdn theme_settings.default_image_product)}}-->
-<div>
-<!--    {{theme_settings.default_image_product}}-->
-</div>
-    <img class="emthemesModez-categoryPage-mainImage" src="{{getImage '500x500' product.main_image.data  }} ">
+</style>
+<div class="containerCustom" id="containerCustom">
 
-<!--    <img src={{json product.main_image.data}} alt="">-->
-    <div>
-        product.id {{ product.id}}
-    </div>
-    <div>
-        product.title {{ product.title}}
-    </div>
-    <div>
-        product.price {{ product.price.without_tax.value}}
-    </div>
+
+    <button class="button button--primary" type="button" id="addToCart">Add to cart</button>
 </div>
 
 
