@@ -1,135 +1,76 @@
 import PageManager from '../page-manager';
-//import get from 'bigcommerce-graphql';
+import get from 'bigcommerce-graphql';
 import regeneratorRuntime from 'regenerator-runtime';
 import utils from '@bigcommerce/stencil-utils';
 
 export default class Custom extends PageManager {
 
 
+
     onReady() {
-//        this.productsOrder = $('productOrderCustommm');
-//        console.log('Custom Order!!!');
-//         async function getData(){
-//                let res = await get('{ site { products (first:3, after:"") { edges { node { name } } } } }')
-//                console.log(await get('{ site { products (first:3, after:"") { edges { node { name } } } } }'))
-//                console.log('res', res);
-//                return $('.containerCustom').html(res);
-//            }
-//
-//            getData();
-//
-//        console.log('fetch end');
-//        console.log('utils.api product', utils.api.product);
-//        console.log('utils.api search', utils.api.search.search);
-
-//        utils.api.product.getById(
-//            104,
-//            { template: 'custom/order-custom-component'},
-//            (err, res) => {
-//                // Will print the name of the product.
-//                //console.log(res);
-//                return $('.containerCustom').html(res);
-//            }
-//        )
-
-    //var fabricSwatchList = "104, 111";
-    // Add Fabric Swatches //
-//
-//    	var arr = [103, 104, 111];
-//    	var callback = (err, response) => {
-//            console.log('response:\n' + response);
-//            $('.containerCustom').append(response);
-//        };
-//
-//    	console.log('arr:\t' + arr);
-////    	console.log('arr.length', arr.length);
-////    	for(var i = 0; i < arr.length; i++) {
-////    		utils.api.product.getById(arr[i], { template: 'custom/order-custom-component' }, callback);
-////    	}
-//
-//            for(var i = 0; i < arr.length; i++) {
-//                  // convert each value into a Promise (future result)
-//                  var promises = arr.map(x => new Promise(function(resolve, reject) {
-//                    utils.api.product.getById(arr[i], { template: 'custom/order-custom-component' }, (err, response) => {
-//                       // the value is available, fulfill the promise with an error or result
-//                       if(err) { reject(err); } else { resolve(response); }
-//                    });
-//                  }));
-//            }
-//            console.log('executing all promises');
-//            Promise.all(promises).then(function(values) {
-//                console.log('all values available at one time', values);
-//                $('.containerCustom').html(values);
-//            });
+         let countryProduct = null;
 
 
+        get (`{site { products(entityIds: [104,107,111]) { edges{ node{ id, entityId, name, description, sku, inventory {isInStock}, createdAt {utc} prices { price { value, currencyCode } } defaultImage { url(width:1280) } } } } } }`)
+        .then((data) => {
+            console.log(data);
+            data.site.products.forEach(el => {
+                var block = document.createElement("DIV");
 
+                block.innerHTML = ` <p id="title" title="${el.name}"> ${el.name} <p>
+                                    <img src="${el.defaultImage.url}" alt="">
+                                    ${el.description}
+                                    <input id="input_${el.entityId}" name="country" type="text"> `;
 
-        const token = JSON.parse(document.getElementById('BC_GraphQL_Token').textContent)
-        console.log('token', token);
+               // console.log('total_price', total_price);
+                document.getElementById("containerCustom").appendChild(block);
 
-
-        async function get(query, removeEdges=true) {
-            const response = await fetch('/graphql', {
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({query})
-            });
-
-            if (response.ok) {
-                const { data } = await response.json()
-
-                data.site.products.edges.forEach(el => {
-//                    var item = document.createElement("DIV");
-//                    item.className = "classItem";
-//                    item.setAttribute("id", "classItem");
-
-                    var name = document.createElement("P");
-                    var img = document.createElement("img");
-                    var description = document.createElement("DIV");
-                    name.innerHTML = `This is a NAME. ${el.node.name}`;
-                    description.innerHTML = `Description: ${el.node.description}`;
-
-                    //images
-                    img.setAttribute('src', `${el.node.defaultImage.url}`);
-                    img.setAttribute('height', '300px');
-                    img.setAttribute('width', '300px');
-
-                    //document.getElementById("containerCustom").appendChild(item);
-
-                    document.getElementById("containerCustom").appendChild(name);
-                    document.getElementById("containerCustom").appendChild(img);
-                    document.getElementById("containerCustom").appendChild(description);
+                document.getElementById(`input_${el.entityId}`).addEventListener("input", function(e) {
+                    var countryProduct = document.getElementById(`input_${el.entityId}`).value;
+                    sum(products);
                 });
 
+            });
+
+            //listener input addToCart
+            document.getElementById('addToCart').addEventListener('click', customAddToCartButton);
+
+            var products = data.site.products;
+            //console.log('products', products);
+            function sum(products) {
+                let priceArr = [];
+                products.forEach(el=> {
+                    priceArr.push(el.prices.price.value);
+                });
+
+                let total = priceArr.reduce((previousValue, currentValue) => previousValue + currentValue)
+
+                var total_price = document.createElement("DIV");
+                total_price.innerHTML = `Total: ${total} ${countryProduct}`;
+
+                document.getElementById("containerCustom").appendChild(total_price)
+            }
+            sum(products);
+
+            async function customAddToCartButton () {
+                for( const product of products) {
+                console.log('product', product);
+                    await fetch(`/cart.php?action=add&product_id=${product.entityId}&qty=1`);
+                }
+                // go to cart
+                window.location = "/cart.php";
+            };
 
 
+        });
 
-
-                 //$('.containerCustom').document.createElement('div');
-
-
-
-//                var para = document.createElement("P");
-//                para.innerHTML = `This is a paragraph. ${data.site.products.edges[0].defaultImage}`;
-//                document.getElementById("containerCustom").appendChild(para);
-
-                return
-
-
-            } else
-                throw Error(`GraphQL error ${response.status} - ${response.statusText}`)
-        }
-
-
-
-        get (`{site { products(entityIds: [104,107,111]) { edges{ node{ id, entityId, name, description, sku, inventory {isInStock}, createdAt {utc} prices { price { value, currencyCode } } defaultImage { url(width:1280) } } } } } }`);
-
-
+        document.addEventListener("load", () => {
+            console.log("DOM готов!");
+          });
 
     }
+
+
+
 
 }
