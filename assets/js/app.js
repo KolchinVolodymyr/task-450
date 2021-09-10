@@ -54,6 +54,7 @@ const pageClasses = {
 
 const customClasses = {
     'pages/home': () => import('./theme/custom'),
+    'pages/custom/product/product-gift': () => import('./theme/custom/product-gift'),
 };
 
 /**
