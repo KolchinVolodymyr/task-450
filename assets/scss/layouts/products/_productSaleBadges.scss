@@ -197,3 +197,37 @@
 .product {
     overflow: hidden;
 }
+
+/*
+  Add custom css
+  task-459
+  Create logic for product badges (New, Sale, Closeout) on the category pages
+*/
+.productBadges_custom {
+    position: relative;
+    span {
+        position: absolute;
+        width: 73%;
+        padding-top:5px;
+        padding-bottom: 5px;
+        padding-left: 2%;
+        padding-right: 25%;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background: stencilColor("color_badge_product_sale_badges");
+        color: stencilColor("color_text_product_sale_badges");
+        font-weight: bold;
+    }
+    .productView-Sale {
+        z-index: 1;
+    }
+    .productView-FreeShipping {
+        z-index: 2;
+    }
+    .productView-New {
+        z-index: 3;
+    }
+    .productView-Closeout {
+        z-index: 4;
+    }
+}

@@ -11,66 +11,67 @@ export default class Custom extends PageManager {
          let countryProduct = null;
 
 
-        get (`{site { products(entityIds: [104,107,111]) { edges{ node{ id, entityId, name, description, sku, inventory {isInStock}, createdAt {utc} prices { price { value, currencyCode } } defaultImage { url(width:1280) } } } } } }`)
+        get (`{site { products(entityIds: [104,103,111]) { edges{ node{ id, entityId, name, description, sku, inventory {isInStock}, createdAt {utc} prices { price { value, currencyCode } } defaultImage { url(width:1280) } } } } } }`)
         .then((data) => {
             console.log(data);
             data.site.products.forEach(el => {
                 var block = document.createElement("DIV");
-
                 block.innerHTML = ` <p id="title" title="${el.name}"> ${el.name} <p>
                                     <img src="${el.defaultImage.url}" alt="">
                                     ${el.description}
                                     <input id="input_${el.entityId}" name="country" type="text"> `;
 
-               // console.log('total_price', total_price);
                 document.getElementById("containerCustom").appendChild(block);
-
+                el.count = 1;
                 document.getElementById(`input_${el.entityId}`).addEventListener("input", function(e) {
+
+                /* Validation start */
+                const regex = /[0-9]/;
+                const chars = e.target.value.split('');
+                const char = chars.pop();
+                if (!regex.test(char)) {
+                    e.target.value = chars.join('');
+                    alert('restricted symbol');
+                }
+                if(chars.length > 1 ){
+                    alert('please input correct number');
+                }
+                /* Validation end */
+
                     var countryProduct = document.getElementById(`input_${el.entityId}`).value;
+
+                    el.count =  countryProduct;
+                    el.sumProd = el.count*el.prices.price.value;
                     sum(products);
                 });
-
+                el.sumProd = el.count*el.prices.price.value;
             });
 
             //listener input addToCart
             document.getElementById('addToCart').addEventListener('click', customAddToCartButton);
 
-            var products = data.site.products;
-            //console.log('products', products);
+            var total_price = document.createElement("DIV");
+            document.getElementById("containerCustom").appendChild(total_price);
+            let products = data.site.products;
+
             function sum(products) {
                 let priceArr = [];
                 products.forEach(el=> {
-                    priceArr.push(el.prices.price.value);
+                    priceArr.push(el.sumProd);
                 });
-
-                let total = priceArr.reduce((previousValue, currentValue) => previousValue + currentValue)
-
-                var total_price = document.createElement("DIV");
-                total_price.innerHTML = `Total: ${total} ${countryProduct}`;
-
-                document.getElementById("containerCustom").appendChild(total_price)
+                let total = priceArr.reduce((previousValue, currentValue) => previousValue + currentValue);
+                total_price.innerHTML = `Total: ${total}`;
             }
             sum(products);
 
             async function customAddToCartButton () {
                 for( const product of products) {
-                console.log('product', product);
-                    await fetch(`/cart.php?action=add&product_id=${product.entityId}&qty=1`);
+                    console.log('product', product);
+                    await fetch(`/cart.php?action=add&product_id=${product.entityId}&qty=${product.count}`);
                 }
                 // go to cart
                 window.location = "/cart.php";
             };
-
-
         });
-
-        document.addEventListener("load", () => {
-            console.log("DOM готов!");
-          });
-
     }
-
-
-
-
 }
