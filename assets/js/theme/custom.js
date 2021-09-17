@@ -9,12 +9,12 @@ export default class Custom extends PageManager {
         this.$body = $('body');
     }
     onReady() {
-        setTimeout(function() {
-            $('#login-form').modal({
-                fadeDuration: 250,
-                fadeDelay: 0.80
-            });
-        }, 4000);
+//        setTimeout(function() {
+//            $('#login-form').modal({
+//                fadeDuration: 250,
+//                fadeDelay: 0.80
+//            });
+//        }, 4000);
     }
 
 }
