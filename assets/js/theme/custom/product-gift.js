@@ -2,16 +2,10 @@ import PageManager from '../page-manager';
 import $ from 'jquery';
 
 export default class CustomProductGift extends PageManager {
-
-     constructor (context) {
+    constructor (context) {
         super(context);
-
-     }
-
-     onReady() {
-        /*
-        * Custom JS
-        */
+    }
+    onReady() {
         var giftOptionID = null;
         this.context.ModifierOptions.forEach(item => {
              if(item.display_name === 'Add a gift option') {

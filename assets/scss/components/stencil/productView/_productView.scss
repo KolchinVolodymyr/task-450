@@ -436,3 +436,15 @@
         width: auto;
     }
 }
+
+.form-field-gift-option input{
+    float: left;
+    margin-right: 3px;
+    margin-top: 2px;
+    outline:none!important;
+}
+
+input:focus + label{
+    outline: 0!important;
+    outline-offset: 0!important;
+}
