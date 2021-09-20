@@ -40,7 +40,7 @@ export default class CustomProductEngraving extends PageManager {
                         }
                         /* Validation end */
                         //replace(/ +/g, ' ').trim() does not include spaces in the price
-                        productInputTextValueLength = $productInputText.find('value').prevObject[0].value.replace(/ +/g, ' ').trim().length;
+                        productInputTextValueLength = $productInputText.find('value').prevObject[0].value.replace(/ +/g, '').trim().length;
 
                         $(`#attribute_select_${EngravingLengthID} > option`).each(function() { //Run through the loop of each option
                             //this.text = <options>text</options>
