@@ -231,6 +231,7 @@
             <input type="hidden" name="product_id" value="{{product.id}}"/>
             <div data-product-option-change style="display:none;">
                 <!--ModifierOptions-->
+                {{inject 'ModifierProduct' product}}
                 {{inject 'ModifierOptions' product.options}}
                 {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
                 {{#if customer}}

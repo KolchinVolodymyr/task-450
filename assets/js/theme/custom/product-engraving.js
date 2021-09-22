@@ -11,19 +11,38 @@ export default class CustomProductEngraving extends PageManager {
         var EngravingLengthID = null;
         var EngravingID = null;
         var productInputTextValueLength = null;
+        var productInputTextValue = null;
+        var productId = this.context.ModifierProduct.id;
+        var productCount = document.getElementById('qty[]').value;
+        var optionValueID = null;
+        var cartItemsID = null;
 
+        console.log('this.context.ModifierOptions', this.context.ModifierOptions);
             this.context.ModifierOptions.forEach(item => {
                 //find an object whose name 'Engraving length'
                 //assign ID to our global variable EngravingLengthID
                 if(item.display_name === 'Engraving length') {
                     EngravingLengthID = item.id;
-                    document.querySelector('[id*="attribute_select"]').style.display = 'none';  // display:none
-                    document.querySelector('[for*="attribute_select"]').style.display = 'none'; // display:none
+                    document.querySelector('[id*="attribute_select"]').style.display = 'none';  //display:none
+                    document.querySelector('[for*="attribute_select"]').style.display = 'none'; //display:none
+
+                    document.querySelector('[id*="attribute_text"]').addEventListener('input', function(e) {
+                        const $productInputText = $('[id*="attribute_text"]');
+                        productInputTextValueLength = $productInputText.find('value').prevObject[0].value.replace(/ +/g, '').trim().length;
+                        item.values.forEach(i =>{
+                            if(productInputTextValueLength == i.data) {
+                                i.selected = true;
+                                optionValueID = i.id;
+                            }
+                        });
+                    });
                 }
 
                 //Find an object whose name 'Engraving'
                 if(item.display_name === 'Engraving') {
                     //Listener input
+                    console.log('item', item);
+                    EngravingID = item.id;
                     document.querySelector('[id*="attribute_text"]').addEventListener('input', function(e) {
                         const $productInputText = $('[id*="attribute_text"]');
 
@@ -39,8 +58,9 @@ export default class CustomProductEngraving extends PageManager {
                              alert('too much symbols. Please, make your text shorter');
                         }
                         /* Validation end */
-                        //replace(/ +/g, ' ').trim() does not include spaces in the price
+                        //replace(/ +/g, '').trim() does not include spaces in the price
                         productInputTextValueLength = $productInputText.find('value').prevObject[0].value.replace(/ +/g, '').trim().length;
+                        productInputTextValue = $productInputText.find('value').prevObject[0].value;
 
                         $(`#attribute_select_${EngravingLengthID} > option`).each(function() { //Run through the loop of each option
                             //this.text = <options>text</options>
@@ -75,8 +95,77 @@ export default class CustomProductEngraving extends PageManager {
 
              });
 
-             /* display; none input a engraving */
-             document.querySelector('#none').addEventListener('change', yesnoCheck);
+            /* display; none input a engraving */
+            document.querySelector('#none').addEventListener('change', yesnoCheck);
+
+            /**/
+            let resGetCart = getCart(`/api/storefront/carts`);
+            //console.log('resGetCart', resGetCart);
+
+            /*Add event Listener*/
+            document.querySelector('#form-action-addToCart').addEventListener('click', function(e){
+                e.preventDefault();
+                    if(cartItemsID) {
+                        /**/
+                        createCartItems(`/api/storefront/carts/${cartItemsID}/items`, {
+                            "lineItems": [
+                                {
+                                    "quantity": productCount,
+                                    "productId": productId,
+                                    "optionSelections": [
+                                        {"optionId": EngravingLengthID, "optionValue": optionValueID},
+                                        {"optionId": EngravingID, "optionValue": `${productInputTextValue}`}
+                                    ]
+                                }
+                            ]
+                        })
+                        .then(data => console.log(JSON.stringify(data)))
+                        .catch(error => console.error(error));
+
+                    } else {
+                        /**/
+                        createCartItems(`/api/storefront/carts`, {
+                            "lineItems": [
+                                {
+                                    "quantity": productCount,
+                                    "productId": productId,
+                                    "optionSelections": [
+                                        {"optionId": EngravingLengthID, "optionValue": optionValueID},
+                                        {"optionId": EngravingID, "optionValue": `${productInputTextValue}`}
+                                    ]
+                                }
+                            ]
+                        })
+                        .then(data => console.log(JSON.stringify(data)))
+                        .catch(error => console.error(error));
+                    }
+
+            });
+
+            function createCartItems(url, cartItems) {
+                return fetch(url, {
+                    method: "POST",
+                    credentials: "same-origin",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(cartItems),
+                })
+                .then(response => response.json());
+            };
+
+            function getCart(url) {
+                 return fetch(url, {
+                    method: "GET",
+                    credentials: "same-origin",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then(response => response.json())
+                .then(cart => { cartItemsID = cart[0]?.id })
+                .catch(error => console.error(error));
+            }
 
     }
 
