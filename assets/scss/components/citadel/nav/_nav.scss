@@ -141,26 +141,3 @@
         }
     }
 }
-
-//Custom CSS
-@include breakpoint("medium") {
-    .navPage-subMenu-list > li > .navPage-childList {
-        display: none;
-    }
-    .navPage-subMenu-item {
-        position: relative;
-    }
-    .navPage-subMenu-item:hover .navPage-childList{
-        display: block;
-        position: absolute;
-        width: 100%;
-        left: 95%;
-        top: 0%;
-        line-height:40px;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top:10px;
-        padding-bottom: 10px;
-        background-color: #e5e5e5;
-    }
-}
