@@ -315,9 +315,22 @@
 // -----------------------------------------------------------------------------
 
 .navPage-subMenu {
+
+
+
     display: none;
+
+
+
+
     outline: 0;
+
+
+
     border: 1px solid #cccccc;
+
+
+
     @include breakpoint("medium") {
         background-color: stencilColor("navPages-subMenu-backgroundColor");
         //padding: spacing("single") spacing("single") (spacing("single") + spacing("half")) !important;
