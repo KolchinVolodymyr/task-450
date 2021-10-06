@@ -6,6 +6,7 @@
   "author": "BigCommerce",
   "license": "MIT",
   "dependencies": {
+    "@apollo/client": "^3.3.15",
     "@bigcommerce/stencil-utils": "^6.8.1",
     "bigcommerce-graphql": "^1.0.6",
     "core-js": "^3.9.0",

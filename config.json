@@ -231,14 +231,14 @@
     "navUser-indicator-backgroundColor": "#333333",
     "navPages-color": "#333333",
     "navPages-color-hover": "#757575",
-    "navPages-subMenu-backgroundColor": "#ffffff",
+    "navPages-subMenu-backgroundColor": "#FFFFFF",
     "navPages-subMenu-separatorColor": "#cccccc",
     "dropdown--quickSearch-backgroundColor": "#e5e5e5",
     "dropdown--wishList-backgroundColor": "#ffffff",
     "blockquote-cite-font-color": "#999999",
     "container-border-global-color-base": "#e5e5e5",
     "container-fill-base": "#ffffff",
-    "container-fill-dark": "#e5e5e5",
+    "container-fill-dark": "#8F8F8F",
     "label-backgroundColor": "#cccccc",
     "label-color": "#ffffff",
     "overlay-backgroundColor": "#333333",
@@ -405,8 +405,7 @@
           "home_garden"
         ]
       },
-      "images": {
-      },
+      "images": {},
       "settings": {
         "hide_breadcrumbs": false,
         "hide_page_heading": false,
